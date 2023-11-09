@@ -22,7 +22,7 @@ def test_step1():
 
 def test_step2():
     # test2
-    result1 = checkout("cd {}; 7z e arx2.7z -o{} -y".format(out, folder1), "Everything is Ok")
+    result1 = checkout("cd /{}; 7z e arx2.7z -o{} -y".format(out, folder1), "Everything is Ok")
     result2 = checkout("cd {}; ls".format(folder1), "qwe")
     result3 = checkout("cd {}; ls".format(folder1), "rty")
     result4 = checkout("cd {}; ls".format(folder1), "add")
