@@ -1,8 +1,9 @@
 import subprocess
 
-tst = "/home/user/tst"
+# tst = "/home/user/tst"
 out = "/home/user/out"
-folder1 = "/home/user/folder1"
+# folder1 = "/home/user/folder1"
+folder2 = "/home/user/folder2"
 
 
 def checkout(cmd, text):
@@ -15,30 +16,16 @@ def checkout(cmd, text):
 
 def test_step1():
     # test1
-    result1 = checkout("cd {}; 7z a {}/arx2".format(tst, out), "Everything is Ok")
-    result2 = checkout("cd {}; ls".format(out), "arx2.7z")
-    assert result1 and result2, "test1 FAIL"
+    result1 = checkout("cd {}; 7z l arx2.7z".format(out), "qwe")
+    result2 = checkout("cd {}; 7z l arx2.7z".format(out), "rty")
+    result3 = checkout("cd {}; 7z l arx2.7z".format(out), "add")
+    assert result1 and result2 and result3, "test1 FAIL"
 
 
 def test_step2():
     # test2
-    result1 = checkout("cd /{}; 7z e arx2.7z -o{} -y".format(out, folder1), "Everything is Ok")
-    result2 = checkout("cd {}; ls".format(folder1), "qwe")
-    result3 = checkout("cd {}; ls".format(folder1), "rty")
-    result4 = checkout("cd {}; ls".format(folder1), "add")
+    result1 = checkout("cd {}; 7z x arx2.7z -o{} -y".format(out, folder2), "Everything is Ok")
+    result2 = checkout("ls {}".format(folder2), "qwe")
+    result3 = checkout("ls {}".format(folder2), "rty")
+    result4 = checkout("ls {}".format(folder2), "add")
     assert result1 and result2 and result3 and result4, "test2 FAIL"
-
-
-def test_step3():
-    # test3
-    assert checkout("cd {}; 7z t arx2.7z ".format(out), "Everything is Ok"), "test3 FAIL"
-
-
-def test_step4():
-    # test4
-    assert checkout("cd {}; 7z u {}arx2.7z ".format(tst, out), "Everything is Ok"), "test4 FAIL"
-
-
-def test_step5():
-    # test5
-    assert checkout("cd {}; 7z d {}/arx2.7z ".format(out, out), "Everything is Ok"), "test5 FAIL"
